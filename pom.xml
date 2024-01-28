@@ -44,6 +44,37 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+			<plugin>
+				<groupId>org.jooq</groupId>
+				<artifactId>jooq-codegen-maven</artifactId>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<!-- Specify your database details -->
+					<jdbc>
+						<driver>org.postgresql.Driver</driver>
+						<url>jdbc:postgresql://localhost:5432/db</url>
+						<user>user</user>
+						<password>123456</password>
+					</jdbc>
+					<generator>
+						<target>
+							<packageName>br.com.vitorgabrielti.springbootjooq</packageName>
+						</target>
+						<database>
+							<name>org.jooq.meta.postgres.PostgresDatabase</name>
+							<excludes>pg_catalog.* | information_schema.*</excludes>
+						</database>
+					</generator>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
